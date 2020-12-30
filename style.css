@@ -44,14 +44,19 @@
   display: flex;
 }
 
+.one-size-ship {
+  width: 80px;
+  background-color: rgba(51, 116, 255, 0.822);
+}
+
 .two-size-ship {
   width: 80px;
-  background-color: violet;
+  background-color: rgba(5, 26, 3, 0.822);
 }
 
 .three-size-ship {
   width: 120px;
-  background-color: rgb(12, 167, 38);
+  background-color: rgb(144, 167, 12);
 }
 
 .four-size-ship {
@@ -66,4 +71,8 @@
 
 .hide {
   display: none;
+}
+
+.unavailable {
+  background-color: rgb(143, 143, 143);
 }

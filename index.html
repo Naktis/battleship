@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Battleship</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" rel="stylesheet"/>
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 class="title">Battleship</h1>
+    </header>
+
+    <main>
+      <div class="notification-wrapper hide">
+        <div class="notification">
+          <h1 id="winner"></h1>
+          <button class="rematch">Play again</button>
+        </div>
+      </div>
+
+      <div class="hide">
+        <button id="start-game-button">Start Game</button>
+        <button id="rotate-ships">Rotate Ships</button>
+        <h3 id="turn">Your turn</h3>
+        <h3 id="result"></h3>
+      </div>
+
+      <div class="grid-display hide">
+        <div class="ship one-size-ship" draggable="true">
+          <div id="one-size-0-0"></div>
+        </div>
+        <div class="ship one-size-ship" draggable="true">
+          <div id="one-size-1-0"></div>
+        </div>
+        <div class="ship one-size-ship" draggable="true">
+          <div id="one-size-2-0"></div>
+        </div>
+        <div class="ship one-size-ship" draggable="true">
+          <div id="one-size-3-0"></div>
+        </div>
+
+        <div class="ship two-size-ship" draggable="true">
+          <div id="two-size-0-0"></div>
+          <div id="two-size-0-1"></div>
+        </div>
+        <div class="ship two-size-ship" draggable="true">
+          <div id="two-size-1-0"></div>
+          <div id="two-size-1-1"></div>
+        </div>
+        <div class="ship two-size-ship" draggable="true">
+          <div id="two-size-2-0"></div>
+          <div id="two-size-2-1"></div>
+        </div>
+
+        <div class="ship three-size-ship" draggable="true">
+          <div id="three-size-0-0"></div>
+          <div id="three-size-0-1"></div>
+          <div id="three-size-0-2"></div>
+        </div>
+        <div class="ship three-size-ship" draggable="true">
+          <div id="three-size-1-0"></div>
+          <div id="three-size-1-1"></div>
+          <div id="three-size-1-2"></div>
+        </div>
+
+        <div class="ship four-size-ship" draggable="true">
+          <div id="four-size-0-0"></div>
+          <div id="four-size-0-1"></div>
+          <div id="four-size-0-2"></div>
+        </div>
+      </div>
+      
+      <div class="container">
+        <div class="grid grid-user">
+        </div>
+        <div class="grid grid-computer"></div>
+      </div>
+
+      <div class="container">
+        <div class="chat"></div>
+      </div>
+    </main>
+  </body>
+</html>

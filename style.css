@@ -2,8 +2,10 @@
   display: flex;
 }
 
+/* todo: responsive boards */
 .grid-user {
   width: 440px;
+  min-width: 440px;
   height: 440px;
   display: flex;
   flex-wrap: wrap;
@@ -13,6 +15,7 @@
 
 .grid-computer {
   width: 440px;
+  min-width: 440px;
   height: 440px;
   display: flex;
   flex-wrap: wrap;
@@ -30,10 +33,12 @@
 }
 
 .grid-display {
-  width: 440px;
-  height: 440px;
+  max-width: 920px;
   margin: 20px;
   background-color: yellow;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .ship {
@@ -45,7 +50,7 @@
 }
 
 .one-size-ship {
-  width: 80px;
+  width: 40px;
   background-color: rgba(51, 116, 255, 0.822);
 }
 
@@ -64,10 +69,7 @@
   background-color: rgb(180, 62, 41);
 }
 
-.ship div {
-  width: 40px;
-  height: 40px;
-}
+
 
 .hide {
   display: none;
@@ -76,3 +78,27 @@
 .unavailable {
   background-color: rgb(143, 143, 143);
 }
+
+.ship div {
+  width: 40px;
+  height: 40px;
+}
+
+.two-size-ship-vertical {
+  width: 40px;
+  height: 80px;
+  flex-wrap: wrap;
+}
+
+.three-size-ship-vertical {
+  width: 40px;
+  height: 120px;
+  flex-wrap: wrap;
+}
+
+.four-size-ship-vertical {
+  width: 40px;
+  height: 160px;
+  flex-wrap: wrap;
+}
+

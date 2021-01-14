@@ -21,6 +21,8 @@
       </div>
 
       <div class="">
+        <label for="player-name">Enter player name: </label>
+        <input type="text" id="player-name">
         <button id="start-game-button">Start Game</button>
         <button id="rotate-ships">Rotate Ships</button>
         <h3 id="turn">Your turn</h3>
@@ -37,7 +39,13 @@
       </div>
 
       <div class="container">
-        <div class="chat"></div>
+        <div class="chat">
+          <div class="chat-text"></div>
+          <div class="chat-input">
+            <input type="text" placeholder="Send a message...">
+            <input type="button" value="SEND">
+          </div>
+        </div>
       </div>
     </main>
   </body>

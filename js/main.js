@@ -5,10 +5,81 @@ document.addEventListener('DOMContentLoaded', () => {
   const ships = document.getElementsByClassName("ship");
   const startButton = document.querySelector('#start-game-button');
   const rotateButton = document.querySelector('#rotate-ships');
+  const restartButton = document.querySelector('#restart');
   const turnDisplay = document.querySelector('#turn');
   const resultDisplay = document.querySelector('#result');
   let userBoard = Array(11).fill(0).map(() => Array(11).fill(0));
   let computerBoard = Array(11).fill(0).map(() => Array(11).fill(0));
+
+  restartButton.addEventListener('click', function () {
+    location.reload();
+  });
+
+
+
+  const shipArray = [
+    {
+      name: "one-size-ship",
+      size: 1,
+      index: 0
+    },
+    {
+      name: "one-size-ship",
+      size: 1,
+      index: 1
+    },
+    {
+      name: "one-size-ship",
+      size: 1,
+      index: 2
+    },
+    {
+      name: "one-size-ship",
+      size: 1,
+      index: 3
+    },
+    {
+      name: "two-size-ship",
+      size: 2,
+      index: 4
+    },
+    {
+      name: "two-size-ship",
+      size: 2,
+      index: 5
+    },
+    {
+      name: "two-size-ship",
+      size: 2,
+      index: 6
+    },
+    {
+      name: "three-size-ship",
+      size: 3,
+      index: 7
+    },
+    {
+      name: "three-size-ship",
+      size: 3,
+      index: 8
+    },
+    {
+      name: "four-size-ship",
+      size: 4,
+      index: 9
+    }
+  ]
+
+  const randomizeButton = document.getElementById("randomize");
+  randomizeButton.addEventListener('click', function () {
+    for (let i = shipArray.length-1; i >= 0; i --) {
+      generate(shipArray[i].size, shipArray[i].name, userBoard, "user", userShips, shipArray[i].index);
+    }
+
+    document.querySelectorAll('.ship').forEach(function(a){
+      a.remove()
+      })
+  })
 
   // create a board
   function createBoard(grid, boardName) {
@@ -65,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
     let startPosIndex = Math.floor(Math.random() * availableStartPos.length);
-    let startPos = availableStartPos[startPosIndex];
+    let startPos = availableStartPos[startPosIndex];    
 
     let shipObject = {
       name: shipName, 
@@ -120,126 +191,183 @@ document.addEventListener('DOMContentLoaded', () => {
   let userShips = [];
   let computerShips = [];
 
-  function randomizeBoard(player, ships, board) {
-    generate(4, "four-size-ship", board, player, ships, 0);
-    generate(3, "three-size-ship", board, player, ships, 1);
-    generate(3, "three-size-ship", board, player, ships, 2);
-    generate(2, "two-size-ship", board, player, ships, 3);
-    generate(2, "two-size-ship", board, player, ships, 4);
-    generate(2, "two-size-ship", board, player, ships, 5);
-    generate(1, "one-size-ship", board, player, ships, 6);
-    generate(1, "one-size-ship", board, player, ships, 7);
-    generate(1, "one-size-ship", board, player, ships, 8);
-    generate(1, "one-size-ship", board, player, ships, 9);
+  for (let i = shipArray.length-1; i >= 0; i --) {
+    generate(shipArray[i].size, shipArray[i].name, computerBoard, "computer", computerShips, shipArray[i].index);
+    //generate(shipArray[i].size, shipArray[i].name, userBoard, "user", userShips, shipArray[i].index);
   }
 
-  randomizeBoard("computer", computerShips, computerBoard);
-  randomizeBoard("user", userShips, userBoard);
-  //console.log(computerShips);
-
-  //console.log(computerBoard);
-
   //--------------------------------------------------
-
-  function createDraggableShip(ship) {
+/*
+  function createUserUnplacedShip(ship) {
     const shipDiv = document.createElement('div');
-    shipDiv.classList.add("ship", ship.name);
-    shipDiv.setAttribute("draggable", "true");
-    shipDiv.id = ship.name + '-' + ship.index;
     
     for (let i = 0; i < ship.size; i ++) {
       const squareDiv = document.createElement('div');
-      squareDiv.classList.add(ship.name + "-" + ship.index + "-" + i);
+      squareDiv.classList.add(ship.name, "ship"+ship.id);
       shipDiv.appendChild(squareDiv);
+      console.log(squareDiv);
     }
-    displayGrid.appendChild(shipDiv);
+    console.log(shipDiv);
+
+    document.getElementById("user-ships").appendChild(shipDiv);
+    console.log("tipo sukure");
   }
 
-  const shipArray = [
-    {
-      name: "one-size-ship",
-      size: 1,
-      index: 0
-    },
-    {
-      name: "one-size-ship",
-      size: 1,
-      index: 1
-    },
-    {
-      name: "one-size-ship",
-      size: 1,
-      index: 2
-    },
-    {
-      name: "one-size-ship",
-      size: 1,
-      index: 3
-    },
-    {
-      name: "two-size-ship",
-      size: 2,
-      index: 0
-    },
-    {
-      name: "two-size-ship",
-      size: 2,
-      index: 1
-    },
-    {
-      name: "two-size-ship",
-      size: 2,
-      index: 2
-    },
-    {
-      name: "three-size-ship",
-      size: 3,
-      index: 0
-    },
-    {
-      name: "three-size-ship",
-      size: 3,
-      index: 1
-    },
-    {
-      name: "four-size-ship",
-      size: 4,
-      index: 1
+  createUserUnplacedShip({name: "two-size-ship", size: 2, id: 3});
+*/
+  var unplacedShips = [];
+  function createUnplacedShip(ship) {
+    const shipDiv = document.createElement("div");
+    shipDiv.classList.add("ship", ship.name);
+    shipDiv.id = ship.index;
+    displayGrid.appendChild(shipDiv);
+    unplacedShips.push(shipDiv);
+  }
+
+  shipArray.forEach(ship => createUnplacedShip(ship));
+
+  unplacedShips.forEach(ship => ship.addEventListener("click", function() {
+    // add selected style
+    for (let row = 1; row <= 10; row ++) {
+      for (let col = 1; col <= 10; col ++) {
+        let square = document.getElementById("user,"+row+","+col);
+        //let isVertical = ship.classList.contains(shipArray[ship.id].name+"-vertical");
+        //let shipSize = shipArray[ship.id].size;
+        square.ship = ship;
+        square.isVertical = ship.classList.contains(shipArray[ship.id].name+"-vertical");
+        square.shipSize = shipArray[ship.id].size;
+        square.addEventListener("mouseover", handleDivMouseOver);
+        square.addEventListener("mouseout", handleDivMouseOut);
+        square.addEventListener("click", handleDivClick);
+      }
     }
-  ]
+  }));
 
+  function handleDivMouseOver(e) {
+    let squareId = e.target.id.split(',');
+    let squareRow = parseInt(squareId[1]);
+    let squareCol = parseInt(squareId[2]);
+    let shipSquare = 0;
+    while (shipSquare < e.target.shipSize) {
+      if (e.target.isVertical) {
+        if (squareRow+shipSquare > 10) {
+          break;
+        } else if (userBoard[squareRow+shipSquare][squareCol] !== 0) {
+          break;
+        }
+      } else if (squareCol+shipSquare > 10) { // goes down here when the ship is horizontal
+          break;
+      } else if (userBoard[squareRow][squareCol+shipSquare] !== 0) {
+        break;
+      }
+      shipSquare ++;
+    }
 
+    if (shipSquare === e.target.shipSize) {
+      let hoverShipSquare = 0;
+      while (hoverShipSquare < e.target.shipSize) {
+        if (e.target.isVertical) {
+          let hoverRow = squareRow+hoverShipSquare;
+          document.getElementById("user,"+hoverRow+","+squareCol)
+                  .classList.add(shipArray[e.target.ship.id].name, "eligible");
+        }
+        else if (!e.target.isVertical) {
+          let hoverCol = squareCol+hoverShipSquare;
+          console.log("user,"+squareRow+","+hoverCol);
+          document.getElementById("user,"+squareRow+","+hoverCol)
+                    .classList.add(shipArray[e.target.ship.id].name, "eligible");
+        }
+        hoverShipSquare ++;
+      }
+    }
+  }
 
-  shipArray.forEach(ship => createDraggableShip(ship));
+  function handleDivMouseOut(e) {
+    let squareId = e.target.id.split(',');
+    let squareRow = parseInt(squareId[1]);
+    let squareCol = parseInt(squareId[2]);
+    let hoverShipSquare = 0;
+    
+    if (userBoard[squareRow][squareCol] !== 0)
+      return;
+
+      while (hoverShipSquare < e.target.shipSize) {
+        if (e.target.isVertical) {
+          let hoverRow = squareRow+hoverShipSquare;
+          if (hoverRow > 10) break;
+          document.getElementById("user,"+hoverRow+","+squareCol)
+                  .classList.remove(shipArray[e.target.ship.id].name, "eligible");
+        }
+        else if (!e.target.isVertical) {
+          let hoverCol = squareCol+hoverShipSquare;
+          if (hoverCol > 10) break;
+          document.getElementById("user,"+squareRow+","+hoverCol)
+                    .classList.remove(shipArray[e.target.ship.id].name, "eligible");
+        }
+        hoverShipSquare ++;
+      }
+  }
+
+  function handleDivClick(e) {
+    if (e.target.classList.contains("eligible")) {
+      let squareId = e.target.id.split(',');
+
+      let shipObject = {
+        name: shipArray[e.target.ship.id].name, 
+        row: parseInt(squareId[1]), 
+        column: parseInt(squareId[2]), 
+        size: e.target.shipSize,  
+        direction: e.target.isVertical? 0 : 1,
+        id: e.target.ship.id,
+        owner: userShips
+      };
+      placeShip(userBoard, shipObject, "user");
+      for (let row = 1; row <= 10; row ++) {
+        for (let col = 1; col <= 10; col ++) {
+          let trash = document.getElementById("user,"+row+","+col);
+          trash.removeEventListener("mouseover", handleDivMouseOver);
+          trash.removeEventListener("mouseout", handleDivMouseOut);
+          trash.removeEventListener("click", handleDivClick);
+        }
+      }
+      document.getElementById(e.target.ship.id).remove();
+    }
+  }
 
   // -------------------------------------------------
   // todo: assign styles to elements through js instead of css
   let isHorizontal = true;
   function rotateShips() {
-    if (isHorizontal) {
-      shipArray.forEach(ship => {
-        const shipObject = document.getElementById(ship.name + '-' + ship.index);
-        shipObject.classList.toggle(ship.name + "-vertical");
-      })
-      isHorizontal = false;
-      return;
-    } else {
-      shipArray.forEach(ship => {
-        const shipObject = document.getElementById(ship.name + '-' + ship.index);
-        shipObject.classList.remove(ship.name + "-vertical");
-      })
-      isHorizontal = true;
+    for (let i = 0; i < 10; i ++) {
+      const ship = document.getElementById(i);
+      if (!ship) continue;
+      let classList = ship.classList;
+      let classIndex = 0;
+      while (classIndex < classList.length) {
+        if (classList[classIndex].includes('-')) {
+          var name = classList[classIndex];
+          break;
+        }
+        classIndex ++;
+      }
+
+      if (isHorizontal) {
+        ship.classList.toggle(name + "-vertical")
+      } else {
+        ship.classList.remove(name + "-vertical");
+      }
     }
+    isHorizontal = !isHorizontal;
   }
 
   rotateButton.addEventListener('click', rotateShips);
 
-  let isGameOn = false;
+  var isGameOn = true;
   var currentPlayer = "user";
   const playerName = document.getElementById("player-name");
 
-  let computerShots = [];
-  let computerShotIndex = 0;
+  var computerShots = [];
+  var computerShotIndex = 0;
   for (let row = 1; row <= 10; row ++) {
     for (let col = 1; col <= 10; col ++) {
       computerShots.push([row, col]);
@@ -261,40 +389,49 @@ document.addEventListener('DOMContentLoaded', () => {
     return array;
   }
 
+  // todo: pridet apsauga kad nezaistu toliau kai won
+
   function play() {
+    // sort ships to match the primary ship array indexes
+    userShips.sort((a, b) => (a.size > b.size) ? 1 : -1);
+    computerShips.sort((a, b) => (a.size > b.size) ? 1 : -1);
+
+    generateHealthyShips("user");
+    generateHealthyShips("opponent");
+
+    let row = document.createElement("div");
+    row.innerHTML = "Game has started";
+    chat.appendChild(row);
+
     console.log("zaidzia useris");
     turnDisplay.innerHTML = playerName.value + " turn to shoot";
     for (let row = 1; row <= 10; row ++) {
       for (let col = 1; col <= 10; col ++) {
         let square = document.getElementById("computer,"+row+","+col);
-        square.addEventListener('click', function() { 
-          if (currentPlayer !== "user")
-            return;
-          currentPlayer = "computer";
-          turnDisplay.innerHTML = "Opponent's turn to shoot";
-          
-          shoot(square);
-          if (square.classList.contains("hit")) {
-            handleHit(computerShips, square);
-          }
-          
-          //console.log("jau turejo pasikeist");
-          //play();
-          //computerTurn();
-          
-          setTimeout(computerTurn, 1000);
-          console.log("zaidzia useris");
-          
-          
-          console.log("pala ka");
-        });
+        square.addEventListener('click', userTurn);
       }
     }
   }
 
+  function userTurn(e) { 
+    if (currentPlayer !== "user")
+      return;
+
+    shoot(e.target);
+    if (e.target.classList.contains("hit")) {
+      handleHit(computerShips, e.target);
+    }
+
+    currentPlayer = "computer";
+    turnDisplay.innerHTML = "Opponent's turn to shoot";
+    
+    setTimeout(computerTurn, 1000);
+  }
+
   function computerTurn() {
-    //setTimeout(() => { }, 1000);
-    console.log("Zaidzia kompas");
+    if (!isGameOn)
+      return;
+
     turnDisplay.innerHTML = "Opponent's turn to shoot";
     let square = document.getElementById(
       "user,"+computerShots[computerShotIndex][0]+","+computerShots[computerShotIndex][1]
@@ -307,7 +444,6 @@ document.addEventListener('DOMContentLoaded', () => {
     computerShotIndex++;
     currentPlayer = "user";
     turnDisplay.innerHTML = playerName.value + " turn to shoot";
-    //play();
   }
 
   function handleHit(ships, square) {
@@ -320,11 +456,36 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
     ships[id].blocksLeft --;
+    console.log("nupylem: "+id);
+    console.log(ships[id]);
 
     if (ships[id].blocksLeft === 0) {
       ships[id].sunk = true;
+
+      console.log(ships[id].size);
+     
+      if (currentPlayer === "user") {
+        removeSunkShip(id, "opponent");
+        addMessage("You have sunk your opponent's " + ships[id].size + " size ship.", "good");
+      }
+      else {
+        removeSunkShip(id, "user");
+        addMessage("The opponent has sunk your " + ships[id].size + " size ship.", "bad");
+      }
       checkIfWon(ships);
     }
+  }
+
+  function removeSunkShip(id, player) {
+    let container = document.getElementById(player+"-ships");
+    for (let i = 0; i < container.childNodes.length; i ++) {
+      if (container.childNodes[i].classList.contains("ship"+id)) {
+        var shipToRemove = container.childNodes[i];
+        break;
+      }
+    }
+    
+    container.removeChild(shipToRemove);
   }
 
   startButton.addEventListener('click', play);
@@ -341,10 +502,67 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkIfWon(playerShips) {
     if (playerShips.every(ship => ship.sunk)) {
       console.log("laimejoooooooooooo");
-      resultDisplay.innerHTML = "won";
+
+      if (currentPlayer === "user")
+        addMessage("YOU WON", "good");
+      else addMessage("YOU LOST", "bad");
+      
+      resultDisplay.innerHTML = "Game end";
       isGameOn = false;
+      endGame();
     };
   }
+
+  let chat = document.getElementById("chat-text");
+  document.getElementById("msg-button").addEventListener('click', function() {
+    let text = document.getElementById("msg-text");
+    if (text.value !== "") {
+      addMessage(text.value, "user");
+      text.value = "";
+    }
+  });
+
+  function addMessage(text, type) {
+    let row = document.createElement("div");
+    row.classList.add("msg-"+type);
+    row.innerHTML = text;
+    chat.insertBefore(row, chat.firstChild);
+  }
+
+  function endGame() {
+    for (let row = 1; row <= 10; row ++) {
+      for (let col = 1; col <= 10; col ++) {
+        let square = document.getElementById("computer,"+row+","+col);
+        square.removeEventListener('click', userTurn);
+      }
+    }
+  }
+
+  function generateHealthyShips(player) {
+    const container = document.getElementById(player+"-ships");
+    for (let i = 0; i < shipArray.length; i ++) {
+      const shipDiv = document.createElement('div');
+      shipDiv.classList.add(shipArray[i].name, "ship"+shipArray[i].index, "ship");
+      container.appendChild(shipDiv);
+    }
+  }
+
+   /* function createUserUnplacedShip(ship) {
+    const shipDiv = document.createElement('div');
+    
+    for (let i = 0; i < ship.size; i ++) {
+      const squareDiv = document.createElement('div');
+      squareDiv.classList.add(ship.name, "ship"+ship.id);
+      shipDiv.appendChild(squareDiv);
+      console.log(squareDiv);
+    }
+    console.log(shipDiv);
+
+    document.getElementById("user-ships").appendChild(shipDiv);
+    console.log("tipo sukure");
+  }
+
+  createUserUnplacedShip({name: "two-size-ship", size: 2, id: 3});*/
 })
 
 // 0 - available

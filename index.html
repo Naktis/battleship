@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <h1 class="title">Battleship</h1>
+      <h1 class="title">BATTLESHIP</h1>
     </header>
 
     <main>
@@ -25,6 +25,8 @@
         <input type="text" id="player-name">
         <button id="start-game-button">Start Game</button>
         <button id="rotate-ships">Rotate Ships</button>
+        <button id="randomize">Randomize Ships</button>
+        <button id="restart">Restart Game</button>
         <h3 id="turn">Your turn</h3>
         <h3 id="result"></h3>
       </div>
@@ -32,18 +34,20 @@
       <div class="grid-display">
       </div>
       
+      
       <div class="container">
-        <div class="grid grid-user">
-        </div>
+        <div id="user-ships"></div>
+        <div class="grid grid-user"></div>
         <div class="grid grid-computer"></div>
+        <div id="opponent-ships"></div>
       </div>
 
       <div class="container">
         <div class="chat">
-          <div class="chat-text"></div>
-          <div class="chat-input">
-            <input type="text" placeholder="Send a message...">
-            <input type="button" value="SEND">
+          <div id="chat-text"></div>
+          <div id="chat-input">
+            <input type="text" id="msg-text" placeholder="Send a message...">
+            <input type="button" id="msg-button" value="SEND">
           </div>
         </div>
       </div>

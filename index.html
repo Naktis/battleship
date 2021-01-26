@@ -5,7 +5,6 @@
     <title>Battleship</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="style.css" rel="stylesheet"/>
-    <script src="js/main.js"></script>
   </head>
   <body>
     <header>
@@ -20,26 +19,38 @@
         </div>
       </div>
 
-      <div class="">
-        <label for="player-name">Enter player name: </label>
+      <div class="container" id="name-div">
+        <label for="player-name">Enter your name </label>
         <input type="text" id="player-name">
+      </div>
+      
+      <div class="container" id="buttons">
         <button id="start-game-button">Start Game</button>
         <button id="rotate-ships">Rotate Ships</button>
         <button id="randomize">Randomize Ships</button>
         <button id="restart">Restart Game</button>
-        <h3 id="turn">Your turn</h3>
+      </div>
+      
+      <div id="info">
+        <h3 id="turn">Place Your Ships</h3>
         <h3 id="result"></h3>
       </div>
-
+      
       <div class="grid-display">
       </div>
       
       
       <div class="container">
-        <div id="user-ships"></div>
-        <div class="grid grid-user"></div>
-        <div class="grid grid-computer"></div>
-        <div id="opponent-ships"></div>
+        <div id="board-names">
+          <h2>Your Board</h2>
+          <h2>Opponent's Board</h2>
+        </div>
+        <div id="grids">
+          <div id="user-ships"></div>
+          <div class="grid grid-user"></div>
+          <div class="grid grid-computer"></div>
+          <div id="opponent-ships"></div>
+        </div>
       </div>
 
       <div class="container">
@@ -53,4 +64,5 @@
       </div>
     </main>
   </body>
+  <script src="main.js"></script> 
 </html>

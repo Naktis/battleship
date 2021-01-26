@@ -1,21 +1,85 @@
-.container {
-  display: flex;
+body {
+  background-color: #DEE7E7;
 }
 
-/* todo: responsive boards */
+header {
+  width: 100%;
+  background-color: rgb(202, 202, 202);
+  text-align: center;
+  line-height: 70px;
+}
+
+main {
+  width: 100%;
+  max-width: 1000px;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+main * {
+  margin: 0 auto;
+}
+
+#name-div {
+  width:50%;
+  flex-wrap:nowrap;
+}
+
+#grids {
+  display:flex;
+  flex-wrap: wrap;
+}
+
+#grids .grid {
+  margin: 20px;
+}
+
+label {
+  width:50%;
+  font-size: large;
+}
+
+#player-name {
+  width: 50%;
+  height: 20px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#buttons {
+  width: 80%
+}
+
+#buttons *{
+  margin-top: 20px;
+  font-size: large;
+  background-color: rgb(172, 172, 172);
+  height: 40px;
+}
+
+#info {
+  margin-top: 50px;
+  text-align: center;
+  font-size: large;
+}
+
 .grid-user {
   width: 330px;
   min-width: 330px;
   height: 330px;
   display: flex;
   flex-wrap: wrap;
-  background-color: rgb(222, 149, 231);
+  background-color: #053C5E;
   margin: 20px;
-  transition: 0.3s;
+  color: white;
+  margin: 0 auto;
 }
 
 .grid-computer div {
-  background-color: aqua;
+  background-color: #053C5E;
 }
 
 .grid-computer {
@@ -24,8 +88,10 @@
   height: 330px;
   display: flex;
   flex-wrap: wrap;
-  background-color: aqua;
+  background-color: #053C5E;
   margin: 20px;
+  color:white;
+  margin: 0 auto;
 }
 
 .grid div {
@@ -40,7 +106,6 @@
 .grid-display {
   max-width: 920px;
   margin: 20px;
-  background-color: yellow;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -58,21 +123,25 @@
 .one-size-ship {
   width: 30px;
   background-color: rgba(51, 116, 255, 0.822);
+  box-shadow: inset 0 0 1px #000;
 }
 
 .two-size-ship {
   width: 60px;
-  background-color: rgba(5, 26, 3, 0.822);
+  background-color: rgba(216, 216, 216, 0.822);
+  box-shadow: inset 0 0 1px #000;
 }
 
 .three-size-ship {
   width: 90px;
   background-color: rgb(144, 167, 12);
+  box-shadow: inset 0 0 1px #000;
 }
 
 .four-size-ship {
   width: 120px;
-  background-color: rgb(180, 62, 41);
+  background-color: rgb(193, 176, 233);
+  box-shadow: inset 0 0 1px #000;
 }
 
 .hide {
@@ -80,7 +149,7 @@
 }
 
 .unavailable {
-  background-color: rgb(143, 143, 143);
+  background-color: #011e30;
 }
 
 .ship div {
@@ -107,11 +176,27 @@
 }
 
 .hit {
-  background-color: orange !important;
+  background-color: #A31621 !important;
 }
 
 .missed {
-  background-color: white !important;
+  background-color: #1F7A8C !important;
+}
+
+#board-names {
+  width: 80%;
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  font-size:small;
+}
+
+#board-names h2 {
+  width: 40%;
+}
+
+#user-ships, #opponent-ships {
+  margin-top: 20px;
 }
 
 .chat {
@@ -120,6 +205,7 @@
   min-width: 330px;
   background-color: white;
   padding: 10px;
+  margin: 15px auto;
 }
 
 #chat-text {
@@ -136,9 +222,7 @@
   padding: 2px;
 }
 
-#player-name {
-  width: 100px;
-}
+
 
 input[type="text"] {
   width: 78%;
@@ -178,9 +262,10 @@ input[type="button"] {
   height: 22px;
 }
 
-header {
-  width: 100%;
-  background-color: rgb(202, 202, 202);
-  text-align: center;
-  line-height: 70px;
+.hide-unavailable {
+  background-color: #053C5E;
+}
+
+.hide-taken {
+  background-color: rgba(216, 216, 216, 0.822);
 }

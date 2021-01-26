@@ -391,6 +391,7 @@ function play() {
     return;
   }
 
+  hideStartButtons();
   changeUserShipColors();
 
   // sort ships to match the primary ship array indexes
@@ -543,6 +544,13 @@ function generateHealthyShips(player) {
     shipDiv.classList.add(shipArray[i].name, "ship"+shipArray[i].index, "ship");
     container.appendChild(shipDiv);
   }
+}
+
+function hideStartButtons() {
+  document.getElementById("name-div").style.display = "none";
+  startButton.style.display = "none";
+  randomizeButton.style.display = "none";
+  rotateButton.style.display = "none";
 }
 
 // 0 - available

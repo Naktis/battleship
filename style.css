@@ -53,7 +53,7 @@ label {
   width: 80%
 }
 
-#buttons *{
+#buttons *, #restart{
   margin-top: 20px;
   font-size: large;
   background-color: rgb(172, 172, 172);
@@ -61,9 +61,9 @@ label {
 }
 
 #info {
-  margin-top: 50px;
+  margin-top: 30px;
   text-align: center;
-  font-size: large;
+  font-size: larger;
 }
 
 .grid-user {
